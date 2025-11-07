@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Корзина - Заказ</title>
+  <style>
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F2E9D6;
+}
+        
+     header {
+    background-color: #F2E9D6;
+    font-family: AL-Medium;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+    box-shadow: 0 2px 5px rgba(99, 54, 5, 0.93);
+    position: relative;
+    padding: 0 20px;
+}
+
+/* Левый и правый навигейшн остаются флексом */
+nav.left-nav ul,
+nav.right-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Отступы между пунктами меню */
+nav.left-nav li,
+nav.right-nav li {
+    margin-left: 55px;
+}
+
+/* Контейнер для логотипа - позиционируем абсолютно по центру */
+.logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10; /* чтобы логотип был поверх навигации */
+}
+
+/* Размеры логотипа */
+.logo img {
+    width: 120px;
+    height: 63px;
+    vertical-align: middle;
+}
+
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        
+        nav li {
+            margin-left: 55px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #573204;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        nav a:hover {
+            color: #ffa500;
+        }
+
+
+    h2 {
+      font-family: AL-SemiBold;
+      font-size: 28px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #573204;
+    }
+
+    h1 {
+      font-family: AL-SemiBold;
+      font-size: 36px;
+      margin: 20px;
+      text-align: center;
+      color: #573204;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      background: #d2c3a4;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .cart-items-container {
+      flex: 1 10 350px;
+      min-width: 300px;
+  
+    }
+
+    .cart-items {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 40px;
+      border: 2px solid #573204;
+      border-radius: 12px;
+      background: #fff;
+      max-height: 800px;
+      overflow-y: auto;
+    }
+
+    .cart-items li {
+      padding: 12px 15px;
+      border-bottom: 1px solid #c9b68a;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-items li:last-child {
+      border-bottom: none;
+    }
+
+    .empty-cart-message {
+      padding: 20px;
+      font-style: italic;
+      color: #a07a2a;
+      text-align: center;
+    }
+
+    .remove-btn {
+      background: #ff6b6b;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      padding: 4px 8px;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+    .remove-btn:hover {
+      background: #e04e4e;
+    }
+
+    .order-form-container {
+      flex: 1 1 400px;
+      min-width: 320px;
+      background: #fff;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 700;
+      font-family: AL-Medium;
+    }
+
+    form input,
+    form select,
+    form textarea {
+      width: 100%;
+      padding: 8px 10px;
+      margin-bottom: 15px;
+      border: 1.5px solid #c9b68a;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: inherit;
+      color: #573204;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+      font-family: AL-Medium;
+    }
+
+    form input:focus,
+    form select:focus,
+    form textarea:focus {
+      border-color: #ffa500;
+      outline: none;
+    }
+
+    form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .submit-order-btn {
+      background-color: #ffa500;
+      border: none;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      padding: 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+    .submit-order-btn:hover:not(:disabled) {
+      background-color: #573204;
+    }
+    .submit-order-btn:disabled {
+      background-color: #d9b87a;
+      cursor: not-allowed;
+    }
+
+    .order-success-message {
+      display: none;
+      margin-top: 20px;
+      font-weight: 700;
+      font-size: 18px;
+      color: #573204;
+      text-align: center;
+    }
+
+    .fade-in-block {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in-block.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+footer {
+  background-color: #d2c3a4;
+  color: #573204;
+  text-align: center;
+  padding: 10px 0;
+  clear: both;
+  margin-top: 40px;
+}
+
+
+
+    @media (max-width: 850px) {
+      .container {
+        flex-direction: column;
+      }
+      .cart-items-container,
+      .order-form-container {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<header>
+        <nav class="left-nav">
+            <ul>
+                <li><a href="../html/about_us.php">About us</a></li>
+                <li><a href="../html/custom_tailoring.html">Custom tailoring</a></li>
+                <li><a href="../html/finished_products.html">Finished products</a></li>
+            </ul>
+        </nav>
+
+
+        <div class="logo">
+            <a href="../html/glavnaya.html"><img src="../img/logo.png" alt="Логотип"></a></div>
+        <nav class="right-nav">
+            <ul>
+                <li><a href="../html/prices.html">Prices</a></li>
+                <li><a href="../html/portfolio.html">Portfolio</a></li>
+                <li><a href="../html/reviews.php">Reviews</a></li>
+                <li><a href="../html/contacts.html">Contacts</a></li>
+                <li><a href="../html/korzina_1.html"><img src="../img/korzina.png" alt="Корзина" width="20px" height="20px"></a></li>
+            </ul>
+        </nav>
+    </header>
+<body>
+
+
+  <h1 class="fade-in-block">Cart and checkout</h1>
+  <div class="container fade-in-block">
+    <div class="cart-items-container">
+      <h2>Items in cart</h2>
+      <ul class="cart-items">
+        <li class="empty-cart-message">Cart is empty</li>
+      </ul>
+    </div>
+
+    <div class="order-form-container">
+      <h2>Client data</h2>
+      <form class="order-form" action="../php/order_process.php" method="POST" id="orderForm">
+        <label for="name">Name </label>
+        <input type="text" id="name" name="name" required placeholder="Your name" />
+
+        <label for="surname">Surname </label>
+        <input type="text" id="surname" name="surname" required placeholder="Your surname" />
+
+        <label for="payment">Payment method</label>
+        <select id="payment" name="payment" required>
+          <option value="" disabled selected>Select payment method</option>
+          <option value="card">Bank card</option>
+          <option value="cash">Cash</option>
+          <option value="online">Online payment</option>
+        </select>
+
+        <label for="delivery">Delivery address</label>
+        <input type="text" id="delivery" name="delivery" required placeholder="Where to deliver the parcel" />
+
+        <label for="phone">Telephone</label>
+        <input type="tel" id="phone" name="phone" required placeholder="+7 (___) ___-__-__" pattern="^\+7\s?\(?\d{3}\)?\s?\d{3}[- ]?\d{2}[- ]?\d{2}$" />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="example@mail.com" />
+
+        <label for="size">Your size</label>
+        <input type="text" id="size" name="size" placeholder="" />
+
+        <label for="comments">Comments</label>
+        <textarea id="comments" name="comments" placeholder="Your size (if needed)"></textarea>
+
+        <button type="submit" class="submit-order-btn" disabled>Place an order</button>
+      </form>
+
+      <div class="order-success-message">The order has been placed. The manager will contact you soon to clarify the details.</div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const cartList = document.querySelector('.cart-items');
+      const emptyMessage = document.querySelector('.empty-cart-message');
+      const orderForm = document.querySelector('.order-form');
+      const submitBtn = orderForm.querySelector('.submit-order-btn');
+      const successMessage = document.querySelector('.order-success-message');
+
+      // Загрузка корзины из localStorage
+      let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+      // Обновить отображение корзины
+      function updateCart() {
+        cartList.innerHTML = '';
+        if (cartItems.length === 0) {
+          emptyMessage.style.display = 'block';
+          submitBtn.disabled = true;
+          return;
+        } else {
+          emptyMessage.style.display = 'none';
+        }
+
+        cartItems.forEach((item, index) => {
+          const li = document.createElement('li');
+          li.textContent = `${item.name} - ${item.price} руб.`;
+
+          const removeBtn = document.createElement('button');
+          removeBtn.textContent = '×';
+          removeBtn.className = 'remove-btn';
+          removeBtn.title = 'Удалить из корзины';
+          removeBtn.addEventListener('click', () => {
+            removeFromCart(index);
+          });
+
+          li.appendChild(removeBtn);
+          cartList.appendChild(li);
+        });
+
+        submitBtn.disabled = false;
+      }
+
+      // Удалить товар из корзины
+      function removeFromCart(index) {
+        cartItems.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+        updateCart();
+        validateForm();
+      }
+
+      // Валидация формы и кнопки
+      function validateForm() {
+        if (cartItems.length === 0) {
+          submitBtn.disabled = true;
+          return;
+        }
+        if (orderForm.checkValidity()) {
+          submitBtn.disabled = false;
+        } else {
+          submitBtn.disabled = true;
+        }
+      }
+
+      orderForm.addEventListener('input', validateForm);
+
+      // Обработка отправки формы
+      orderForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        if (cartItems.length === 0) {
+          alert('Корзина пуста! Добавьте товары перед оформлением заказа.');
+          return;
+        }
+
+        if (!orderForm.checkValidity()) {
+          orderForm.reportValidity();
+          return;
+        }
+
+        // Собираем данные формы
+const formData = new FormData(orderForm);
+formData.append('products', JSON.stringify(cartItems));
+
+fetch(orderForm.action, {
+  method: orderForm.method,
+  body: formData
+})
+.then(response => response.text())
+.then(data => {
+  // Очищаем корзину и localStorage только если заказ успешно оформлен
+  if (data.includes('успешно')) {
+    cartItems = [];
+    localStorage.removeItem('cart');
+    updateCart();
+
+    orderForm.reset();
+    submitBtn.disabled = true;
+
+    successMessage.style.display = 'block';
+    successMessage.scrollIntoView({ behavior: 'smooth' });
+
+    setTimeout(() => {
+      successMessage.style.display = 'none';
+    }, 5000);
+  } else {
+    alert(data); // Показываем ошибку, если она есть
+  }
+})
+.catch(() => {
+  alert('Ошибка соединения с сервером!');
+});
+
+        // Очищаем корзину и localStorage
+        cartItems = [];
+        localStorage.removeItem('cart');
+        updateCart();
+
+        orderForm.reset();
+        submitBtn.disabled = true;
+
+        successMessage.style.display = 'block';
+        successMessage.scrollIntoView({ behavior: 'smooth' });
+
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+        }, 5000);
+      });
+
+      // Инициализация
+      updateCart();
+      validateForm();
+    })();
+  </script>
+
+<script>
+  //плавное понявление
+  function onScrollFadeIn() {
+    document.querySelectorAll('.fade-in-block').forEach(function(el) {
+      const rect = el.getBoundingClientRect();
+      if(rect.top < window.innerHeight - 100) {
+        el.classList.add('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', onScrollFadeIn);
+  window.addEventListener('DOMContentLoaded', onScrollFadeIn);
+</script>
+
+  <!-- Подвал -->
+    <footer>
+        © 2025 Reshetnikova Darya
+    </footer>
+
+</body>
+</html>

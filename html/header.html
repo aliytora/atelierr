@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Atelier</title>
+    <style type="text/css">
+
+        @font-face {
+            font-family: AL-ExtraBold;
+            src: url(../fonts/AbhayaLibre-ExtraBold.ttf);
+        }
+
+        @font-face {
+            font-family: AL-SemiBold;
+            src: url(../fonts/AbhayaLibre-SemiBold.ttf);
+        }
+
+        @font-face {
+            font-family: AL-Medium;
+            src: url(../fonts/AbhayaLibre-Medium.ttf);
+        }
+        /* Основные стили */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 90px;
+            background-color: #F2E9D6;
+
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 90px;
+            background-color: #F2E9D6;
+            box-shadow: 0 2px 5px rgba(99, 54, 5, 0.93);
+            z-index: 1000;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: AL-Medium;
+        }
+
+
+
+/* Левый и правый навигейшн остаются флексом */
+nav.left-nav ul,
+nav.right-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Отступы между пунктами меню */
+nav.left-nav li,
+nav.right-nav li {
+    margin-left: 65px;
+}
+
+/* Контейнер для логотипа - позиционируем абсолютно по центру */
+.logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10; /* чтобы логотип был поверх навигации */
+}
+
+/* Размеры логотипа */
+.logo img {
+    width: 120px;
+    height: 63px;
+    vertical-align: middle;
+}
+
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        
+        nav li {
+            margin-left: 55px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: black;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        nav a:hover {
+            color: #ffa500;
+        }
+
+/* Мобильные устройства (до 599px) */
+@media screen and (max-width: 599px) {
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 0;
+  }
+
+  nav.left-nav,
+  nav.right-nav {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0 0 0;
+  }
+
+  nav.left-nav ul,
+  nav.right-nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px; /* вместо margin */
+    padding: 0;
+  }
+
+  nav.left-nav li,
+  nav.right-nav li {
+    margin: 0; /* убираем margin, используем gap */
+  }
+
+  .logo {
+    position: relative; /* чтобы логотип не перекрывал меню */
+    left: auto;
+    top: auto;
+    transform: none;
+    margin: 0 auto;
+  }
+
+  .logo img {
+    width: 80px;
+    height: auto;
+  }
+
+  main {
+    padding: 10px;
+  }
+
+  section {
+    padding: 10px;
+  }
+}
+
+/* Планшеты (600px - 899px) */
+@media screen and (min-width: 600px) and (max-width: 899px) {
+  header {
+    flex-wrap: wrap; /* чтобы меню и логотип могли переноситься */
+    height: auto;
+    padding: 15px 20px;
+  }
+
+  nav.left-nav,
+  nav.right-nav {
+    width: auto;
+    text-align: center;
+  }
+
+  nav.left-nav ul,
+  nav.right-nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  nav.left-nav li,
+  nav.right-nav li {
+    margin: 0;
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+
+  .logo img {
+    width: 100px;
+    height: auto;
+  }
+
+  main {
+    padding: 20px;
+  }
+
+  section {
+    padding: 20px;
+  }
+}
+
+/* Десктопы (900px и выше) */
+@media screen and (min-width: 900px) {
+  header {
+    flex-wrap: nowrap;
+    height: 90px;
+    padding: 0 20px;
+  }
+
+  nav.left-nav ul,
+  nav.right-nav ul {
+    justify-content: space-evenly;
+    gap: 55px; /* как у тебя было */
+  }
+
+  nav.left-nav li,
+  nav.right-nav li {
+    margin: 0;
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+
+  .logo img {
+    width: 120px;
+    height: auto;
+  }
+
+  main {
+    padding: 30px;
+  }
+
+  section {
+    padding: 30px;
+  }
+}
+
+    </style>
+</head>
+<body>
+    
+    <!-- Шапка -->
+    <header>
+        <nav class="left-nav">
+            <ul>
+                <li><a href="./html/about_us.php">About us</a></li>
+                <li><a href="./html/custom_tailoring.html">Custom tailoring</a></li>
+                <li><a href="./html/finished_products.html">Finished products</a></li>
+            </ul>
+        </nav>
+
+
+        <div class="logo">
+            <a href="./html/glavnaya.html"><img src="./img/logo.png" alt="Логотип"></a></div>
+        <nav class="right-nav">
+            <ul>
+                <li><a href="./html/prices.html">Prices</a></li>
+                <li><a href="./html/portfolio.html">Portfolio</a></li>
+                <li><a href="./html/reviews.php">Reviews</a></li>
+                <li><a href="./html/contacts.html">Contacts</a></li>
+                <li><a href="./html/korzina_1.html"><img src="./img/korzina.png" alt="Корзина" width="20px" height="20px"></a></li>
+            </ul>
+        </nav>
+    </header>
+    

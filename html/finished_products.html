@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Product Catalog</title>
+<style>
+@font-face {
+    font-family: AL-ExtraBold;
+    src: url(../fonts/AbhayaLibre-ExtraBold.ttf);
+}
+
+@font-face {
+    font-family: AL-SemiBold;
+    src: url(../fonts/AbhayaLibre-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: AL-Medium;
+    src: url(../fonts/AbhayaLibre-Medium.ttf);
+}
+
+
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #F2E9D6;
+}
+        
+     header {
+    background-color: #F2E9D6;
+    font-family: AL-Medium;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+    box-shadow: 0 2px 5px rgba(99, 54, 5, 0.93);
+    position: relative;
+    padding: 0 20px;
+}
+
+nav.left-nav ul,
+nav.right-nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+
+nav.left-nav li,
+nav.right-nav li {
+  margin-left: 55px;
+}
+
+/* Контейнер для логотипа - позиционируем абсолютно по центру */
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10; /* чтобы логотип был поверх навигации */
+}
+
+/* Размеры логотипа */
+.logo img {
+  width: 120px;
+  height: 63px;
+  vertical-align: middle;
+}
+
+
+nav.left-nav ul, nav.right-nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav.left-nav li {
+  margin-left: 55px;
+}
+
+nav.right-nav li {
+  margin-left: 55px;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  transition: all 0.3s ease-in-out;
+}
+
+nav a:hover {
+  color: #ffa500;
+}
+
+
+.search-container {
+  position: static; 
+  margin: 20px auto 40px; 
+  max-width: 300px;
+  text-align: center;
+}
+
+
+
+.search-container input[type="text"] {
+  padding: 10px 16px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  width: 100%;
+  font-family: AL-Medium;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-container input[type="text"]:focus {
+  outline: none;
+  border-color: #ffa500;
+  box-shadow: 0 0 5px #ffa500;
+}
+
+
+/* Каталог товаров */
+.catalog {
+  max-width: 960px;
+  margin: 20px auto 60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px 20px;
+  font-family: AL-Medium;
+  color: #573204;
+  
+}
+
+.catalog-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e2d4ba;
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.catalog-item img.product-image {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.catalog-item img:hover{
+  transform: scale(1.05);
+}
+
+.catalog-item h3 {
+  font-family: AL-ExtraBold;
+  font-size: 22px;
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+
+.catalog-item p.description {
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: center;
+  margin: 0 0 15px 0;
+  height: 80px; 
+  overflow: hidden;
+}
+
+.catalog-item button.add-to-cart {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background-image: url('../img/korzina.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: transform 0.3s ease;
+}
+
+.catalog-item button.add-to-cart:hover {
+  transform: scale(1.1);
+}
+
+/* Кнопка корзины */
+.add-to-cart-btn {
+  background: url('../img/korzina.png') no-repeat center center;
+  background-size: contain;
+  width: 30px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  transform: scale(1.2);
+}
+
+.add-to-cart-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(70%);
+}
+
+.in-cart-label {
+  display: none;
+  color: #573204;
+  font-size: 14px;
+  vertical-align: middle;
+  font-family: Arial, sans-serif;
+}
+
+
+.fade-in-block {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in-block.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+footer {
+  background-color: #d2c3a4;
+  color: #573204;
+  text-align: center;
+  padding: 10px 0;
+  clear: both;
+}
+
+/* Мобильные устройства (до 599px) */
+@media screen and (max-width: 599px) {
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 0;
+  }
+
+  nav.left-nav,
+  nav.right-nav {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0 0 0;
+  }
+
+  nav.left-nav ul,
+  nav.right-nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px; /* вместо margin */
+    padding: 0;
+  }
+
+  nav.left-nav li,
+  nav.right-nav li {
+    margin: 0; 
+  }
+
+  .logo {
+    position: relative; 
+    left: auto;
+    top: auto;
+    transform: none;
+    margin: 0 auto;
+  }
+
+  .logo img {
+    width: 80px;
+    height: auto;
+  }
+
+  main {
+    padding: 10px;
+  }
+
+  section {
+    padding: 10px;
+  }
+}
+
+/* Планшеты (600px - 899px) */
+@media screen and (min-width: 600px) and (max-width: 899px) {
+  header {
+    flex-wrap: wrap; 
+    height: auto;
+    padding: 15px 20px;
+  }
+
+  nav.left-nav, nav.right-nav {
+    width: auto;
+    text-align: center;
+  }
+
+  nav.left-nav ul, nav.right-nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  nav.left-nav li, nav.right-nav li {
+    margin: 0;
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+
+  .logo img {
+    width: 100px;
+    height: auto;
+  }
+
+  main {
+    padding: 20px;
+  }
+
+  section {
+    padding: 20px;
+  }
+}
+
+/* Десктопы (900px и выше) */
+@media screen and (min-width: 900px) {
+  header {
+    flex-wrap: nowrap;
+    height: 90px;
+    padding: 0 20px;
+  }
+
+  nav.left-nav ul,nav.right-nav ul {
+    justify-content: space-evenly;
+    gap: 55px; 
+  }
+
+  nav.left-nav li,
+  nav.right-nav li {
+    margin: 0;
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+
+  .logo img {
+    width: 120px;
+    height: auto;
+  }
+
+  main {
+    padding: 30px;
+  }
+
+  section {
+    padding: 30px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="left-nav">
+    <ul>
+       <li><a href="../html/about_us.php">About us</a></li>
+       <li><a href="../html/custom_tailoring.html">Custom tailoring</a></li>
+      <li><a href="../html/finished_products.html">Finished products</a></li>
+    </ul>
+</nav>
+    
+  <div class="logo">
+    <a href="../html/glavnaya.html"><img src="../img/logo.png" alt="Логотип"></a>
+  </div>
+
+<nav class="right-nav">
+  <nav class="right-nav">
+    <ul>
+      <li><a href="../html/prices.html">Prices</a></li>
+      <li><a href="../html/portfolio.html">Portfolio</a></li>
+      <li><a href="../html/reviews.php">Reviews</a></li>
+      <li><a href="../html/contacts.html">Contacts</a></li>
+      <li><a href="../html/korzina_1.html"><img src="../img/korzina.png" alt="Корзина" width="20" height="20"></a></li>
+    </ul>
+  </nav>
+</nav>
+ 
+
+
+</header>
+
+<main>
+   <div class="search-container fade-in-block">
+    <input type="text" placeholder="Search products..." id="searchInput" />
+  </div>
+    
+<section class="catalog fade-in-block" id="catalog">
+
+  <div class="catalog-item fade-in-block" data-name="Elegant Dress" data-description="A beautiful elegant dress perfect for any occasion. Made from high-quality fabric for comfort and style.">
+    
+    <img class="product-image" src="../img/k_1.png" alt="Elegant Dress" />
+    <h3>Elegant Dress</h3>
+    <p class="description">A beautiful elegant dress perfect for any occasion. Made from high-quality fabric for comfort and style.</p>
+  
+    <button class="add-to-cart" aria-label="Add Elegant Dress to cart"></button>
+    <span class="in-cart-label"></span>
+
+  </div>
+  
+  <div class="catalog-item fade-in-block" data-name="Sheath dress" data-description="Warm and stylish classic coat designed to keep you cozy during cold seasons with a timeless look.">
+    
+    <img class="product-image" src="../img/k_2.png" alt="Classic Coat" />
+    <h3>Classic Coat</h3>
+    <p class="description">Warm and stylish classic coat designed to keep you cozy during cold seasons with a timeless look.</p>
+  
+    <button class="add-to-cart" aria-label="Add Classic Coat to cart"></button>
+    <span class="in-cart-label"></span>
+
+  </div>
+
+  <div class="catalog-item fade-in-block" data-name="Summer Sundress" data-description="Light and breezy sundress ideal for summer days. Breathable fabric and flattering fit for all body types.">
+    
+    <img class="product-image" src="../img/k_3.png" alt="Summer Sundress" />
+    <h3>Summer Sundress</h3>
+    <p class="description">Light and breezy sundress ideal for summer days. Breathable fabric and flattering fit for all body types.</p>
+  
+    <button class="add-to-cart" aria-label="Add Summer Sundress to cart"></button>
+    <span class="in-cart-label"></span>
+
+  </div>
+
+  <div class="catalog-item fade-in-block" data-name="Trousers are sraight" data-description="Luxurious evening gown with exquisite detailing. Perfect for formal events and special occasions.">
+  
+    <img class="product-image" src="../img/k_4.png" alt="Evening Gown" />
+    <h3>Evening Gown</h3>
+    <p class="description">Luxurious evening gown with exquisite detailing. Perfect for formal events and special occasions.</p>
+  
+    <button class="add-to-cart" aria-label="Add Evening Gown to cart"></button>
+    <span class="in-cart-label"></span>
+  </div>
+
+  <div class="catalog-item fade-in-block" data-name="Cropped jacket" data-description="Comfortable casual blouse suitable for everyday wear. Soft fabric and elegant design.">
+  
+    <img class="product-image" src="../img/k_5.png" alt="Casual Blouse" />
+    <h3>Casual Blouse</h3>
+    <p class="description">Comfortable casual blouse suitable for everyday wear. Soft fabric and elegant design.</p>
+  
+    <button class="add-to-cart" aria-label="Add Casual Blouse to cart"></button>
+    <span class="in-cart-label"></span>
+  
+  </div>
+
+  <div class="catalog-item fade-in-block" data-name="Bloose" data-description="Professional office skirt with a modern cut. Perfect for work and business meetings.">
+  
+    <img class="product-image" src="../img/k_6.png" alt="Office Skirt" />
+    <h3>Office Skirt</h3>
+    <p class="description">Professional office skirt with a modern cut. Perfect for work and business meetings.</p>
+  
+    <button class="add-to-cart" aria-label="Add Office Skirt to cart"></button>
+    <span class="in-cart-label"></span>
+
+  </div>
+</section>
+</main>
+
+
+
+
+<script>
+// Поиск по каталогу
+const searchInput = document.getElementById('searchInput');
+const catalogItems = document.querySelectorAll('.catalog-item');
+
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  catalogItems.forEach(item => {
+    const name = item.dataset.name.toLowerCase();
+    const description = item.dataset.description.toLowerCase();
+    if (name.includes(query) || description.includes(query)) {
+      item.style.display = 'flex';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+});
+</script>
+
+<script>
+  // добавление в корзину
+function getCart() {
+  return JSON.parse(localStorage.getItem('cart') || '[]');
+}
+function setCart(cart) {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function updateCartButtons() {
+  const cart = getCart();
+  document.querySelectorAll('.catalog-item').forEach(item => {
+    const name = item.dataset.name;
+    const btn = item.querySelector('.add-to-cart');
+    const label = item.querySelector('.in-cart-label');
+    const inCart = cart.some(product => product.name === name);
+    if (inCart) {
+      btn.disabled = true;
+      label.textContent = 'В корзине';
+      label.style.display = 'block';
+      btn.title = 'Уже в корзине';
+    } else {
+      btn.disabled = false;
+      label.textContent = '';
+      label.style.display = 'none';
+      btn.title = 'Добавить в корзину';
+    }
+  });
+}
+
+function setupCartButtons() {
+  document.querySelectorAll('.catalog-item').forEach(item => {
+    const btn = item.querySelector('.add-to-cart');
+    btn.addEventListener('click', () => {
+      const name = item.dataset.name;
+      let cart = getCart();
+      if (!cart.some(product => product.name === name)) {
+        cart.push({name});
+        setCart(cart);
+        updateCartButtons();
+      }
+    });
+  });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  setupCartButtons();
+  updateCartButtons();
+});
+</script>
+
+
+
+<script>
+// обновление после заказа
+let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+// Функция для обновления меток "В корзине"
+function updateInCartLabels() {
+  document.querySelectorAll('.catalog-item').forEach(item => {
+    const id = item.dataset.id;
+    const inCartLabel = item.querySelector('.in-cart-label');
+    const addBtn = item.querySelector('.add-to-cart-btn');
+    const inCart = cartItems.some(product => product.id == id);
+    if (inCart) {
+      inCartLabel.style.display = 'inline';
+      addBtn.disabled = true;
+    } else {
+      inCartLabel.style.display = 'none';
+      addBtn.disabled = false;
+    }
+  });
+}
+
+// Функция добавления товара
+function addToCart(product) {
+  if (!cartItems.some(item => item.id == product.id)) {
+    cartItems.push(product);
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+    updateInCartLabels();
+  }
+}
+
+// обработчики на кнопки "Добавить в корзину"
+document.querySelectorAll('.catalog-item').forEach(item => {
+  const addBtn = item.querySelector('.add-to-cart-btn');
+  if (!addBtn) return;
+  addBtn.addEventListener('click', () => {
+    const product = {
+      id: item.dataset.id,
+      name: item.querySelector('.product-name').textContent,
+      price: parseFloat(item.querySelector('.product-price').textContent)
+    };
+    addToCart(product);
+    alert('Товар добавлен в корзину!');
+  });
+});
+
+// 5. При загрузке страницы обновляем метки
+updateInCartLabels();
+</script>
+
+</script>
+
+
+
+<script>
+  //плавное понявление
+  function onScrollFadeIn() {
+    document.querySelectorAll('.fade-in-block').forEach(function(el) {
+      const rect = el.getBoundingClientRect();
+      if(rect.top < window.innerHeight - 100) {
+        el.classList.add('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', onScrollFadeIn);
+  window.addEventListener('DOMContentLoaded', onScrollFadeIn);
+</script>
+
+<!-- Подвал -->
+    <footer>
+        © 2025 Reshetnikova Darya
+    </footer>
+ 
+</body>
+</html>

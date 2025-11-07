@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Atelier</title>
+    <style type="text/css">
+
+        @font-face {
+            font-family: AL-ExtraBold;
+            src: url(../fonts/AbhayaLibre-ExtraBold.ttf);
+        }
+
+        @font-face {
+            font-family: AL-SemiBold;
+            src: url(../fonts/AbhayaLibre-SemiBold.ttf);
+        }
+
+        @font-face {
+            font-family: AL-Medium;
+            src: url(../fonts/AbhayaLibre-Medium.ttf);
+        }
+         footer {
+            background-color: #d2c3a4;
+            color: #573204;
+            text-align: center;
+            padding: 10px 0;
+            clear: both;
+        }
+/* Мобильные устройства (до 599px) */
+@media screen and (max-width: 599px) {
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 0;
+  }
+
+  nav.left-nav,
+  nav.right-nav {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0 0 0;
+  }
+
+  nav.left-nav ul,
+  nav.right-nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px; /* вместо margin */
+    padding: 0;
+  }
+
+  nav.left-nav li,
+  nav.right-nav li {
+    margin: 0; /* убираем margin, используем gap */
+  }
+
+  .logo {
+    position: relative; /* чтобы логотип не перекрывал меню */
+    left: auto;
+    top: auto;
+    transform: none;
+    margin: 0 auto;
+  }
+
+  .logo img {
+    width: 80px;
+    height: auto;
+  }
+
+  main {
+    padding: 10px;
+  }
+
+  section {
+    padding: 10px;
+  }
+}
+
+/* Планшеты (600px - 899px) */
+@media screen and (min-width: 600px) and (max-width: 899px) {
+  header {
+    flex-wrap: wrap; /* чтобы меню и логотип могли переноситься */
+    height: auto;
+    padding: 15px 20px;
+  }
+
+  nav.left-nav,
+  nav.right-nav {
+    width: auto;
+    text-align: center;
+  }
+
+  nav.left-nav ul,
+  nav.right-nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  nav.left-nav li,
+  nav.right-nav li {
+    margin: 0;
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+
+  .logo img {
+    width: 100px;
+    height: auto;
+  }
+
+  main {
+    padding: 20px;
+  }
+
+  section {
+    padding: 20px;
+  }
+}
+
+/* Десктопы (900px и выше) */
+@media screen and (min-width: 900px) {
+  header {
+    flex-wrap: nowrap;
+    height: 90px;
+    padding: 0 20px;
+  }
+
+  nav.left-nav ul,
+  nav.right-nav ul {
+    justify-content: space-evenly;
+    gap: 55px; /* как у тебя было */
+  }
+
+  nav.left-nav li,
+  nav.right-nav li {
+    margin: 0;
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+
+  .logo img {
+    width: 120px;
+    height: auto;
+  }
+
+  main {
+    padding: 30px;
+  }
+
+  section {
+    padding: 30px;
+  }
+}
+
+    </style>
+
+
+<!-- Подвал -->
+    <footer>
+        © 2025 Reshetnikova Darya
+    </footer>

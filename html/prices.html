@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Atelier - Цены</title>
+  <style>
+    @font-face {
+      font-family: AL-ExtraBold;
+      src: url(../fonts/AbhayaLibre-ExtraBold.ttf);
+    }
+
+    @font-face {
+      font-family: AL-SemiBold;
+      src: url(../fonts/AbhayaLibre-SemiBold.ttf);
+    }
+
+    @font-face {
+      font-family: AL-Medium;
+      src: url(../fonts/AbhayaLibre-Medium.ttf);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #F2E9D6;
+      color: #573204;
+    }
+
+     header {
+    background-color: #F2E9D6;
+    font-family: AL-Medium;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+    box-shadow: 0 2px 5px rgba(99, 54, 5, 0.93);
+    position: relative;
+    padding: 0 20px;
+}
+
+.logo {
+  /* убираем абсолютное позиционирование */
+  position: static;
+  left: auto;
+  top: auto;
+  transform: none;
+  z-index: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 120px; /* фиксируем ширину для логотипа */
+}
+
+.logo img {
+  width: 120px;
+  height: 63px;
+  vertical-align: middle;
+}
+
+
+    nav.left-nav ul,
+    nav.right-nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    nav.left-nav li,
+    nav.right-nav li {
+      margin-left: 55px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: black;
+      transition: all 0.3s ease-in-out;
+      font-family: AL-Medium;
+      font-size: 16px;
+    }
+
+    nav a:hover {
+      color: #ffa500;
+    }
+
+
+    main {
+      max-width: 960px;
+      margin: 40px auto 60px;
+      
+      text-align: center;
+      font-family: AL-Medium;
+      color: #573204;
+    }
+
+    h1 {
+      font-family: AL-ExtraBold;
+      font-size: 36px;
+      margin-bottom: 15px;
+      color: #573204;
+      margin-top: 10px;
+    }
+
+    h2.table-title {
+      font-family: AL-SemiBold;
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #573204;
+    }
+
+    .description-text {
+      font-size: 18px;
+      line-height: 1.5;
+      max-width: 800px;
+      margin: 0 auto 40px auto;
+      white-space: pre-line;
+    }
+
+    table {
+      width: 80%;
+      max-width: 800px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: #d2c3a4;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      font-size: 18px;
+      font-family: AL-Medium;
+    }
+
+    thead tr {
+      background-color: #c1b08a;
+    }
+
+    thead th {
+      padding: 15px;
+      font-family: AL-ExtraBold;
+      color: #573204;
+      text-align: center;
+      border-bottom: 2px solid #b59f6f;
+    }
+
+    thead th.service-header {
+      text-align: left;
+      padding-left: 40px;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: #e2d4ba;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f0e8d0;
+    }
+
+    tbody tr:hover {
+      background-color: #f7f1db;
+      cursor: default;
+    }
+
+    tbody td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #b59f6f;
+      vertical-align: middle;
+    }
+
+    tbody td.service-cell {
+      text-align: left;
+      padding-left: 40px;
+    }
+
+    /* Кнопка корзины */
+    .add-to-cart-btn {
+      background: url('../img/korzina.png') no-repeat center center;
+      background-size: contain;
+      width: 30px;
+      height: 30px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .add-to-cart-btn:hover {
+      transform: scale(1.2);
+    }
+
+    footer {
+      background-color: #d2c3a4;
+      color: #573204;
+      text-align: center;
+      padding: 10px 0;
+      clear: both;
+    }
+
+    /* Мобильные устройства (до 599px) */
+    @media screen and (max-width: 599px) {
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 0;
+      }
+
+      nav.left-nav,
+      nav.right-nav {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0 0 0;
+      }
+
+      nav.left-nav ul,
+      nav.right-nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px; /* вместо margin */
+        padding: 0;
+      }
+
+      nav.left-nav li,
+      nav.right-nav li {
+        margin: 0; /* убираем margin, используем gap */
+      }
+
+      .logo {
+        position: relative; /* чтобы логотип не перекрывал меню */
+        left: auto;
+        top: auto;
+        transform: none;
+        margin: 0 auto;
+      }
+
+      .logo img {
+        width: 80px;
+        height: auto;
+      }
+
+      main {
+        padding: 10px;
+      }
+
+      section {
+        padding: 10px;
+      }
+    }
+
+    /* Планшеты (600px - 899px) */
+    @media screen and (min-width: 600px) and (max-width: 899px) {
+      header {
+        flex-wrap: wrap; /* чтобы меню и логотип могли переноситься */
+        height: auto;
+        padding: 15px 20px;
+      }
+
+      nav.left-nav,
+      nav.right-nav {
+        width: auto;
+        text-align: center;
+      }
+
+      nav.left-nav ul,
+      nav.right-nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      nav.left-nav li,
+      nav.right-nav li {
+        margin: 0;
+      }
+
+      .logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+      }
+
+      .logo img {
+        width: 100px;
+        height: auto;
+      }
+
+      main {
+        padding: 20px;
+      }
+
+      section {
+        padding: 20px;
+      }
+    }
+
+    /* Десктопы (900px и выше) */
+    @media screen and (min-width: 900px) {
+      header {
+        flex-wrap: nowrap;
+        height: 90px;
+        padding: 0 20px;
+      }
+
+      nav.left-nav ul,
+      nav.right-nav ul {
+        justify-content: space-evenly;
+        gap: 55px; /* как у тебя было */
+      }
+
+      nav.left-nav li,
+      nav.right-nav li {
+        margin: 0;
+      }
+
+      .logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+      }
+
+      .logo img {
+        width: 120px;
+        height: auto;
+      }
+
+      main {
+        padding: 30px;
+      }
+
+      section {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="left-nav">
+      <ul>
+        <li><a href="../html/about_us.php">About us</a></li>
+        <li><a href="../html/custom_tailoring.html">Custom tailoring</a></li>
+        <li><a href="../html/finished_products.html">Finished products</a></li>
+      </ul>
+    </nav>
+
+    <div class="logo">
+      <a href="../html/glavnaya.html"><img src="../img/logo.png" alt="Логотип" /></a>
+    </div>
+
+    <nav class="right-nav">
+      <ul>
+        <li><a href="../html/prices.html">Prices</a></li>
+        <li><a href="../html/portfolio.html">Portfolio</a></li>
+        <li><a href="../html/reviews.php">Reviews</a></li>
+        <li><a href="../html/contacts.html">Contacts</a></li>
+        <li>
+          <a href="../html/korzina_1.html"><img src="../img/korzina.png" alt="Корзина" width="20" height="20"
+          /></a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1 class="fade-in">Women's clothing prices</h1>
+    <p class="description-text fade-in">
+      The price list shows the initial prices for sewing a basic simple model. With an increase in the complexity<br>of the style, the number of decorative elements, and the size of 50, the cost of tailoring increases.<br>Therefore, the final price for the manufacture of the product is calculated individually in consultation<br>with the designer after clarifying all the details of the model. The prices are for tailoring only! Fabrics<br>and lining materials are not included in the indicated price. Sewing consultations are free!
+    <br><br>The sewing period is from 2 to 4 weeks, depending on the complexity of the style<br>and the current workload of the studio at the time of application!
+    </p>
+
+<section id="dresses-section" class="fade-in">
+    <h2 class="table-title">Dresses and sundresses</h2>
+
+    <table class="fade-in">
+      <thead>
+        <tr>
+          <th class="service-header">Name</th>
+          <th>Price (RU)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="service-cell">Summer sundress without lining</td>
+          <td>15000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Summer sundress without lining в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Lined sheath dress</td>
+          <td>18000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Lined sheath dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Chanel style dress</td>
+          <td>12000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Chanel style dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Cocktail dress</td>
+          <td>20000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Cocktail dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Evening dress</td>
+          <td>25000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Evening dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Evening dress with a corset</td>
+          <td>28000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Evening dress with a corset в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Evening multi-layered dress</td>
+          <td>32000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Evening multi-layered dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Evening multi-layered dress with a corset</td>
+          <td>35000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Evening multi-layered dress with a corset в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Wedding dress</td>
+          <td>50000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Wedding dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Prom dress</td>
+          <td>27000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Prom dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</section>
+
+<section id="skirt-section" class="fade-in">
+    <h2 class="table-title">Skirts</h2>
+
+    <table class="fade-in">
+      <thead>
+        <tr>
+          <th class="service-header">Name</th>
+          <th>Price (RU)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="service-cell">Straight unlined skirt</td>
+          <td>15000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Summer sundress without lining в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Unlined yoke skirt</td>
+          <td>18000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Lined sheath dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Unlined pencil skirt</td>
+          <td>12000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Chanel style dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Pleated skirt, tulip skirt</td>
+          <td>20000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Cocktail dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Gode skirt with wedges</td>
+          <td>25000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Evening dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Sun skirt (midi length)</td>
+          <td>28000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Evening dress with a corset в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Half-sun skirt (midi length)</td>
+          <td>32000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Evening multi-layered dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Tulle tutu skirt</td>
+          <td>35000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Evening multi-layered dress with a corset в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Asymmetrical skirt</td>
+          <td>50000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Wedding dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+</section>
+
+<section id="trousers-section" class="fade-in">
+    <h2 class="table-title">Women's trousers</h2>
+
+    <table class="fade-in">
+      <thead>
+        <tr>
+          <th class="service-header">Name</th>
+          <th>Price (RU)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="service-cell">Women's trousers with elastic band </td>
+          <td>15000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Summer sundress without lining в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Classic unlined trousers</td>
+          <td>18000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Lined sheath dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Classic lined trousers </td>
+          <td>12000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Chanel style dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Shorts </td>
+          <td>20000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Cocktail dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Bermuda shorts (knee length), breeches </td>
+          <td>25000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Evening dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">7/8 trousers </td>
+          <td>28000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Evening dress with a corset в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Capri (mid-calf length) </td>
+          <td>32000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Evening multi-layered dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Sleeveless jumpsuit </td>
+          <td>35000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Evening multi-layered dress with a corset в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</section>
+
+<section id="blouses-section" class="fade-in">
+        <h2 class="table-title">Tops, blouses and cardigans</h2>
+
+    <table class="fade-in">
+      <thead>
+        <tr>
+          <th class="service-header">Name</th>
+          <th>Price (RU)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="service-cell">Corset</td>
+          <td>15000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Summer sundress without lining в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Tank top with straps </td>
+          <td>18000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Lined sheath dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Blouse without collar and sleeves </td>
+          <td>12000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Chanel style dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Blouse with frill or bow and sleeves </td>
+          <td>20000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Cocktail dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Blouse with sleeves and collar, blouse shirt</td>
+          <td>25000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Evening dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</section>
+
+<section id="jackets-section" class="fade-in">
+        <h2 class="table-title">Jackets and vests</h2>
+
+    <table class="fade-in">
+      <thead>
+        <tr>
+          <th class="service-header">Name</th>
+          <th>Price (RU)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="service-cell">Unlined vest </td>
+          <td>15000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Summer sundress without lining в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Long unlined vest </td>
+          <td>18000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Lined sheath dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Summer jacket without lining</td>
+          <td>12000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Chanel style dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Classic lined jacket</td>
+          <td>20000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Cocktail dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Chanel style jacket </td>
+          <td>25000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Evening dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</section>
+
+<section id="suits-section" class="fade-in">
+        <h2 class="table-title">Women`s suits</h2>
+    <table class="fade-in">
+      <thead>
+        <tr>
+          <th class="service-header">Name</th>
+          <th>Price (RU)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="service-cell">Classic women's suit (jacket + pencil skirt) </td>
+          <td>15000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Summer sundress without lining в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Classic women's suit (jacket + trousers) </td>
+          <td>18000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Lined sheath dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Women's suit (jacket + pencil skirt + blouse shirt)</td>
+          <td>12000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Chanel style dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+        <tr>
+          <td class="service-cell">Women's suit (jacket + trousers + blouse-shirt) </td>
+          <td>20000</td>
+          <td>
+            <button class="add-to-cart-btn" aria-label="Добавить Cocktail dress в корзину" title="Добавить в корзину"></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  </main>
+
+  <footer>© 2025 Reshetnikova Darya</footer>
+
+<script>
+function getCart() {
+  return JSON.parse(localStorage.getItem('cart') || '[]');
+}
+function setCart(cart) {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+document.querySelectorAll('.add-to-cart-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var row = btn.closest('tr');
+    var name = row.children[0].innerText.trim();
+    var price = row.children[1].innerText.trim();
+    var cart = getCart();
+    // Проверяем, есть ли уже такой товар
+    if (!cart.find(item => item.name === name && item.price === price)) {
+      cart.push({name: name, price: price});
+      setCart(cart);
+      btn.disabled = true;
+      btn.innerText = 'В корзине';
+    }
+  });
+});
+// При загрузке страницы помечаем добавленные
+window.addEventListener('DOMContentLoaded', function() {
+  var cart = getCart();
+  document.querySelectorAll('.add-to-cart-btn').forEach(function(btn) {
+    var row = btn.closest('tr');
+    var name = row.children[0].innerText.trim();
+    var price = row.children[1].innerText.trim();
+    if (cart.find(item => item.name === name && item.price === price)) {
+      btn.disabled = true;
+      btn.innerText = 'В корзине';
+    }
+  });
+});
+</script>
+
+<script>
+  // плавное появление
+  function onScrollFadeIn() {
+    document.querySelectorAll('.fade-in').forEach(function(el) {
+      const rect = el.getBoundingClientRect();
+      if(rect.top < window.innerHeight - 100) {
+        el.classList.add('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', onScrollFadeIn);
+  window.addEventListener('DOMContentLoaded', onScrollFadeIn);
+</script>
+
+</body>
+</html>

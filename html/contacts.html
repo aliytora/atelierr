@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Atelier - Контакты</title>
+  <style>
+    @font-face {
+      font-family: AL-ExtraBold;
+      src: url(../fonts/AbhayaLibre-ExtraBold.ttf);
+    }
+    @font-face {
+      font-family: AL-SemiBold;
+      src: url(../fonts/AbhayaLibre-SemiBold.ttf);
+    }
+    @font-face {
+      font-family: AL-Medium;
+      src: url(../fonts/AbhayaLibre-Medium.ttf);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #F2E9D6;
+      color: #573204;
+    }
+
+     header {
+    background-color: #F2E9D6;
+    font-family: AL-Medium;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+    box-shadow: 0 2px 5px rgba(99, 54, 5, 0.93);
+    position: relative;
+    padding: 0 20px;
+}
+
+    nav.left-nav ul,
+    nav.right-nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    nav.left-nav li,
+    nav.right-nav li {
+      margin-left: 55px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: black;
+      transition: all 0.3s ease-in-out;
+      font-family: AL-Medium;
+      font-size: 16px;
+    }
+
+    nav a:hover {
+      color: #ffa500;
+    }
+
+    .logo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+    }
+
+    .logo img {
+      width: 120px;
+      height: 63px;
+      vertical-align: middle;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 40px auto 60px;
+      padding: 0 15px;
+      font-family: AL-Medium;
+      color: #573204;
+    }
+
+    h1 {
+      font-family: Al-ExtraBold;
+      color: #573204;
+      font-size: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .contact-info {
+      background-color: #d2c3a4;
+      border-radius: 20px;
+      padding: 30px 40px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .contact-item {
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .contact-label {
+      font-family: AL-SemiBold;
+      min-width: 140px;
+      color: #573204;
+      font-weight: 700;
+    }
+
+    .contact-value {
+      color: #573204;
+      word-break: break-word;
+      flex: 1;
+    }
+
+    .social-links a {
+      margin-right: 20px;
+      color: #573204;
+      font-size: 22px;
+      text-decoration: none;
+      font-family: AL-Medium;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #ffa500;
+    }
+
+    .vk-icon::before,
+    .tg-icon::before,
+    .wa-icon::before {
+      content: "";
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 6px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      vertical-align: middle;
+    }
+
+    .vk-icon::before {
+      background-image: url('../img/tg.png');
+    }
+
+    .tg-icon::before {
+      background-image: url('../img/vk.png');
+    }
+
+    .wa-icon::before {
+      background-image: url('../img/ws.png');
+    }
+
+    .hours {
+      white-space: pre-line;
+      font-family: AL-Medium;
+      font-size: 18px;
+      color: #573204;
+      margin-top: 15px;
+    }
+
+    /* Стили для плавного появления */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Задержки для последовательного появления */
+    .fade-in:nth-child(1) { transition-delay: 0.1s; }
+    .fade-in:nth-child(2) { transition-delay: 0.2s; }
+    .fade-in:nth-child(3) { transition-delay: 0.3s; }
+
+    #map {
+      width: 100%;
+      max-width: 960px;
+      height: 400px;
+      margin: 0 auto 10px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      background-color: #d2c3a4;
+      color: #573204;
+      text-align: center;
+      padding: 10px 0;
+      clear: both;
+    }
+
+    /* Медиазапросы остаются без изменений */
+    @media screen and (max-width: 599px) {
+      /* ... существующие медиазапросы ... */
+    }
+
+    @media screen and (min-width: 600px) and (max-width: 899px) {
+      /* ... существующие медиазапросы ... */
+    }
+
+    @media screen and (min-width: 900px) {
+      /* ... существующие медиазапросы ... */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="left-nav">
+      <ul>
+        <li><a href="../html/about_us.php">About us</a></li>
+        <li><a href="../html/custom_tailoring.html">Custom tailoring</a></li>
+        <li><a href="../html/finished_products.html">Finished products</a></li>
+      </ul>
+    </nav>
+
+    <div class="logo">
+      <a href="../html/glavnaya.html"><img src="../img/logo.png" alt="Логотип" /></a>
+    </div>
+
+    <nav class="right-nav">
+      <ul>
+        <li><a href="../html/prices.html">Prices</a></li>
+        <li><a href="../html/portfolio.html">Portfolio</a></li>
+        <li><a href="../html/reviews.php">Reviews</a></li>
+        <li><a href="../html/contacts.html">Contacts</a></li>
+        <li>
+          <a href="../html/korzina_1.html"
+            ><img src="../img/korzina.png" alt="Корзина" width="20" height="20"
+          /></a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1 class="fade-in">Contacts</h1>
+
+    <div class="contact-info fade-in">
+      <div class="contact-item">
+        <div class="contact-label">Address:</div>
+        <div class="contact-value">68 Lenin Street, Izhevsk, Udmurt Republic</div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-label">Phone:</div>
+        <div class="contact-value">+7 (123) 456-78-90</div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-label">Social:</div>
+        <div class="contact-value social-links">
+          <a href="https://vk.com/cmkckdkc" target="_blank" rel="noopener" class="vk-icon">@cmkckdkc</a><br>
+          <a href="https://t.me/cmkckdkc" target="_blank" rel="noopener" class="tg-icon">@cmkckdkc</a><br>
+          <a href="https://wa.me/1234567890" target="_blank" rel="noopener" class="wa-icon">@cmkckdkc</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-label">Opening hours:</div>
+        <div class="contact-value hours">
+Monday - Friday: 8.00-19.00
+Saturday - Sunday: 10.00-17.00
+        </div>
+      </div>
+    </div>
+
+    <div class="map-container fade-in" style="width:100%; max-width:960px; margin:0 auto 60px; border-radius:20px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+      <iframe 
+        src="https://yandex.ru/map-widget/v1/?ll=53.22582%2C56.844727&z=18&pt=53.22582,56.844727,pm2rdm" 
+        width="100%" height="400" frameborder="0" allowfullscreen="true">
+      </iframe>
+    </div>
+  </main>
+
+  <footer>© 2025 Reshetnikova Darya</footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      
+      function checkVisibility() {
+        fadeElements.forEach(element => {
+          const elementTop = element.getBoundingClientRect().top;
+          const elementBottom = element.getBoundingClientRect().bottom;
+          
+          if (elementTop < window.innerHeight && elementBottom > 0) {
+            element.classList.add('visible');
+          }
+        });
+      }
+      
+      // Проверяем при загрузке
+      checkVisibility();
+      
+      // Проверяем при скролле
+      window.addEventListener('scroll', checkVisibility);
+    });
+  </script>
+</body>
+</html>

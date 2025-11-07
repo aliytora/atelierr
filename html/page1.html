@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Atelier</title>
+    <style type="text/css">
+
+        @font-face {
+            font-family: AL-ExtraBold;
+            src: url(../fonts/AbhayaLibre-ExtraBold.ttf);
+        }
+
+        @font-face {
+            font-family: AL-SemiBold;
+            src: url(../fonts/AbhayaLibre-SemiBold.ttf);
+        }
+
+        @font-face {
+            font-family: AL-Medium;
+            src: url(../fonts/AbhayaLibre-Medium.ttf);
+        }
+        /* Основные стили */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 90px;
+            background-color: #F2E9D6;
+        }
+        
+        main {
+            max-width: 960px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        p{
+            font-family: Al-Medium;
+            color: #573204;
+            font-size: 20px;
+        }
+
+        .gg{
+            background-color: #d2c3a4;
+        }
+
+        h1 {
+      font-family: AL-ExtraBold;
+      font-size: 36px;
+      margin-bottom: 15px;
+      color: #573204;
+    }
+
+        h2{
+            padding-top: 35px;
+            font-family: Al-ExtraBold;
+            color: #573204;
+            font-size: 30px;
+        }
+
+        .gl_wn{
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+
+        .gl_ww{
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+        
+        section {
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        section.yellow-bg {
+            background-color: #d2c3a4;
+            height: 230px;
+        }
+
+        .why_we {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .why_we p {
+            line-height: 1.2;
+            text-align: center; 
+        }
+        
+        footer {
+            background-color: #d2c3a4;
+            color: #573204;
+            text-align: center;
+            padding: 10px 0;
+            clear: both;
+        }
+/* Мобильные устройства (до 599px) */
+@media screen and (max-width: 599px) {
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 0;
+  }
+
+  nav.left-nav,
+  nav.right-nav {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0 0 0;
+  }
+
+  nav.left-nav ul,
+  nav.right-nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px; /* вместо margin */
+    padding: 0;
+  }
+
+  nav.left-nav li,
+  nav.right-nav li {
+    margin: 0; /* убираем margin, используем gap */
+  }
+
+  .logo {
+    position: relative; /* чтобы логотип не перекрывал меню */
+    left: auto;
+    top: auto;
+    transform: none;
+    margin: 0 auto;
+  }
+
+  .logo img {
+    width: 80px;
+    height: auto;
+  }
+
+  main {
+    padding: 10px;
+  }
+
+  section {
+    padding: 10px;
+  }
+}
+
+/* Планшеты (600px - 899px) */
+@media screen and (min-width: 600px) and (max-width: 899px) {
+  header {
+    flex-wrap: wrap; /* чтобы меню и логотип могли переноситься */
+    height: auto;
+    padding: 15px 20px;
+  }
+
+  nav.left-nav,
+  nav.right-nav {
+    width: auto;
+    text-align: center;
+  }
+
+  nav.left-nav ul,
+  nav.right-nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  nav.left-nav li,
+  nav.right-nav li {
+    margin: 0;
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+
+  .logo img {
+    width: 100px;
+    height: auto;
+  }
+
+  main {
+    padding: 20px;
+  }
+
+  section {
+    padding: 20px;
+  }
+}
+
+/* Десктопы (900px и выше) */
+@media screen and (min-width: 900px) {
+  header {
+    flex-wrap: nowrap;
+    height: 90px;
+    padding: 0 20px;
+  }
+
+  nav.left-nav ul,
+  nav.right-nav ul {
+    justify-content: space-evenly;
+    gap: 55px; /* как у тебя было */
+  }
+
+  nav.left-nav li,
+  nav.right-nav li {
+    margin: 0;
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+
+  .logo img {
+    width: 120px;
+    height: auto;
+  }
+
+  main {
+    padding: 30px;
+  }
+
+  section {
+    padding: 30px;
+  }
+}
+
+    </style>
+
+
+</head>
+<body>
+
+    <!-- Основной контент -->
+    <main>
+        <section>
+            <img src="./img/gl_banner.png" alt="Баннер" width="900px" height="450px">
+
+            <section class="gg">
+            <p>You can order custom-made women's clothing at the Wardrobe studio. We offer our ideas for <br>creating clothes that can be repeated exactly or with changes, as well as we embody your ideas of <br>individual tailoring. In both cases, you get a product made according to your measurements. No<br>size charts or inaccurate cuts, just a great fit and comfort!</p>
+            </section>
+            <h1>Who needs individual tailoring</h1>
+            <div class="gl_wn" >
+                <img src="./img/gl_who_need1.png" alt="who need reason 1" width="200px" class="gl_wn">
+                <img src="./img/gl_who_need2.png" alt="who need reason 2" width="200px" class="gl_wn">
+                <img src="./img/gl_who_need3.png" alt="who need reason 3" width="200px" class="gl_wn">
+            </div>
+        </section>
+        <section class="yellow-bg">
+            <img src="./img/gl_why_we1.png" alt="why we reason 1" width="100px" class="gl_ww">
+            <img src="./img/gl_why_we2.png" alt="why we reason 1" width="100px" class="gl_ww">
+            <img src="./img/gl_why_we3.png" alt="why we reason 1" width="100px" class="gl_ww">
+            <img src="./img/gl_why_we4.png" alt="why we reason 1" width="100px" class="gl_ww">
+
+            <div class="why_we">
+            <p>We create clothes<br>according to<br>individual<br>measurements</p>
+            <p>We guarantee a<br>perfect fit of the<br>product</p>
+            <p>Only careful<br>handwork of high<br>quality</p>
+            <p>We will implement<br>your idea and offer<br>the best fabrics</p>
+            </div>
+        </section>
+    </main>
+    
+ 
+</body>
+</html>
